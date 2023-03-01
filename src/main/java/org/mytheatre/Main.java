@@ -38,17 +38,23 @@ public class Main {
         manager.hireCashiers(Arrays.asList(cashier1, cashier2));
 
         CustomerService customerService = new CustomerServiceImpl();
-        Customer customer1 = new Customer(12000.0, customerService);
+        Customer customer1 = new Customer("Lilian Ovrawah", 12000.0, customerService);
         customer1.selectMovie(movie1, 2);
         customer1.selectMovie(movie3, 2);
         customer1.selectMovie(movie4, 2);
 
-        Customer customer2 = new Customer(2000.0, customerService);
+        Customer customer2 = new Customer("Jet Li", 2000.0, customerService);
         customer2.selectMovie(movie1, 2);
         customer2.selectMovie(movie5, 2);
 
-        Customer customer3 = new Customer(17000.0, customerService);
+        Customer customer3 = new Customer("Solanke Decagon", 17000.0, customerService);
         customer3.selectMovie(movie2, 2);
         customer3.selectMovie(movie3, 2);
+
+        cashier1.addCustomerToQueue(customer1);
+        cashier1.addCustomerToQueue(customer2);
+        cashier1.addCustomerToQueue(customer3);
+
+        cashier1.attendToQueue();
     }
 }

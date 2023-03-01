@@ -3,15 +3,22 @@ package org.mytheatre.customer;
 import org.mytheatre.movie.Movie;
 import org.mytheatre.services.CustomerService;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
+    private final String name;
     private final CustomerService customerService;
+    private final String timeOfArrival;
     private double creditCard;
-    public Customer(double creditCard, CustomerService customerService) {
+    public Customer(String name, double creditCard, CustomerService customerService) {
+        this.name = name;
         this.creditCard = creditCard;
         this.customerService = customerService;
+        this.timeOfArrival = LocalDateTime.now().toString();
+    }
+    public String getName() {
+        return name;
     }
     public void selectMovie(Movie selectedMovie, int quantity) {
         customerService.selectMovie(selectedMovie, quantity);
@@ -25,5 +32,13 @@ public class Customer {
 
     public List<Movie> getCart() {
         return customerService.getCustomerCart();
+    }
+
+    public String getTimeOfArrival() {
+        return timeOfArrival;
+    }
+    @Override
+    public int compareTo(Customer nextCustomer) {
+        return this.getTimeOfArrival().compareTo(nextCustomer.getTimeOfArrival());
     }
 }

@@ -3,10 +3,15 @@ package org.mytheatre.services.implementations;
 import org.mytheatre.movie.Movie;
 import org.mytheatre.services.CustomerService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
-    private List<Movie> customerCart;
+    private final List<Movie> customerCart;
+
+    public CustomerServiceImpl() {
+        this.customerCart = new ArrayList<>();
+    }
 
     @Override
     public void selectMovie(Movie selectedMovie, int quantity) {
