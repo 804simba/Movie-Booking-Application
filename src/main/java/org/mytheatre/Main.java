@@ -4,6 +4,7 @@ import org.mytheatre.customer.Customer;
 import org.mytheatre.enums.Genre;
 import org.mytheatre.enums.Role;
 import org.mytheatre.movie.Movie;
+import org.mytheatre.services.CartSizeComparator;
 import org.mytheatre.services.CashierService;
 import org.mytheatre.services.CustomerService;
 import org.mytheatre.services.ManagerService;
@@ -31,9 +32,10 @@ public class Main {
         ManagerService managerService = new ManagerServiceImpl(theatre);
         Manager manager = new Manager("Vin Diesel", Role.MANAGER, managerService);
 
+        CartSizeComparator cartSizeComparator = new CartSizeComparator();
         CashierService cashierService = new CashierServiceImpl(theatre);
         Cashier cashier1 = new Cashier("Blossom Eseobor", Role.CASHIER, cashierService);
-        Cashier cashier2 = new Cashier("Jane Doe", Role.CASHIER, cashierService);
+        Cashier cashier2 = new Cashier("Jane Doe", Role.CASHIER, cashierService, cartSizeComparator);
 
         manager.hireCashiers(Arrays.asList(cashier1, cashier2));
 
@@ -54,6 +56,25 @@ public class Main {
         cashier1.addCustomerToQueue(customer1);
         cashier1.addCustomerToQueue(customer2);
         cashier1.addCustomerToQueue(customer3);
+
+        cashier2.attendToQueue();
+
+        Customer customer4 = new Customer("Lilian Ovrawah", 12000.0, customerService);
+        customer4.selectMovie(movie1, 2);
+        customer4.selectMovie(movie3, 2);
+        customer4.selectMovie(movie4, 2);
+
+        Customer customer5 = new Customer("Jet Li", 2000.0, customerService);
+        customer5.selectMovie(movie1, 2);
+        customer5.selectMovie(movie5, 2);
+
+        Customer customer6 = new Customer("Solanke Decagon", 17000.0, customerService);
+        customer6.selectMovie(movie2, 2);
+        customer6.selectMovie(movie3, 2);
+
+        cashier1.addCustomerToQueue(customer5);
+        cashier1.addCustomerToQueue(customer5);
+        cashier1.addCustomerToQueue(customer6);
 
         cashier1.attendToQueue();
     }

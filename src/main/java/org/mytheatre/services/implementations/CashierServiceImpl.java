@@ -18,6 +18,10 @@ public class CashierServiceImpl implements CashierService {
         for (Movie currentMovie : customer.getCart()) {
             if (isMovieAvailable(currentMovie)) {
                 totalCostOfMovies += currentMovie.getPrice() * currentMovie.getQuantity();
+            } else {
+                System.out.println("Sorry we don't have " + currentMovie.getName() + " in stock..");
+                customer.getCart().remove(currentMovie);
+                System.out.println("Removed: " + currentMovie.getName());
             }
         }
 
