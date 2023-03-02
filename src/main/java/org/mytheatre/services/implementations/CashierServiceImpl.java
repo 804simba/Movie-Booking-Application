@@ -5,6 +5,9 @@ import org.mytheatre.customer.Customer;
 import org.mytheatre.movie.Movie;
 import org.mytheatre.services.CashierService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CashierServiceImpl implements CashierService {
     private final Theatre theatre;
 
@@ -15,15 +18,17 @@ public class CashierServiceImpl implements CashierService {
     @Override
     public void attendToCustomer(Customer customer) {
         double totalCostOfMovies = 0.0;
+        List<Movie> removeFromCart = new ArrayList<>();
         for (Movie currentMovie : customer.getCart()) {
             if (isMovieAvailable(currentMovie)) {
                 totalCostOfMovies += currentMovie.getPrice() * currentMovie.getQuantity();
             } else {
-                System.out.println("Sorry we don't have " + currentMovie.getName() + " in stock..");
-                customer.getCart().remove(currentMovie);
+                System.out.println("Sorry " + customer.getName() + " we don't have " + currentMovie.getName() + " in stock..");
+                removeFromCart.add(currentMovie);
                 System.out.println("Removed: " + currentMovie.getName());
             }
         }
+        customer.getCart().removeAll(removeFromCart);
 
         if (customer.getCreditCard() >= totalCostOfMovies) {
             for (Movie currentMovie : customer.getCart()) {

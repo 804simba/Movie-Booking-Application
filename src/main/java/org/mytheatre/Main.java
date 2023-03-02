@@ -57,7 +57,8 @@ public class Main {
         cashier1.addCustomerToQueue(customer2);
         cashier1.addCustomerToQueue(customer3);
 
-        cashier2.attendToQueue();
+        System.out.println(">>>>> Cashier: " + cashier2.getName() + " has started attending to customers....");
+        cashier1.attendToQueue();
 
         Customer customer4 = new Customer("Lilian Ovrawah", 12000.0, customerService);
         customer4.selectMovie(movie1, 2);
@@ -72,10 +73,11 @@ public class Main {
         customer6.selectMovie(movie2, 2);
         customer6.selectMovie(movie3, 2);
 
-        cashier1.addCustomerToQueue(customer5);
-        cashier1.addCustomerToQueue(customer5);
-        cashier1.addCustomerToQueue(customer6);
+        cashier2.addCustomerToQueue(customer4);
+        cashier2.addCustomerToQueue(customer5);
+        cashier2.addCustomerToQueue(customer6);
 
-        cashier1.attendToQueue();
+        System.out.println(">>>>> Cashier: " + cashier2.getName() + " has started attending to customers....");
+        cashier2.attendToQueue();
     }
 }
